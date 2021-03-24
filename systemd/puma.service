@@ -1,0 +1,17 @@
+[Unit]
+Description=Example BEAM application
+After=network.target
+
+Requires=puma.socket
+
+[Service]
+# Create required directories configure HOME
+WorkingDirectory=/home/vagrant/DEV/MISC/systemd-puma-example
+
+User=vagrant
+Group=vagrant
+Type=notify
+ExecStart=/nix/store/7yd7agdf56aby6klzi80c3jdl5qphbql-ruby-2.6.6/bin/bundle exec --keep-file-descriptors puma -b tcp://0.0.0.0:3333 config.ru
+# WatchdogSec=1min
+NotifyAccess=main
+Restart=on-failure
