@@ -16,7 +16,8 @@ units:
 	echo ${UNITS}
 
 systemd:
-	@sudo mkdir -p ${SYSTEMD_TARGET} sudo cp -f systemd/* ${SYSTEMD_TARGET}
+	@sudo mkdir -p ${SYSTEMD_TARGET}
+	sudo cp -f systemd/* ${SYSTEMD_TARGET}
 	@sudo chmod 644 $(addprefix ${SYSTEMD_TARGET}/,${UNITS})
 	@sudo systemctl daemon-reload
 	-for unit in ${UNITS}; do sudo systemctl stop $$unit || true; done
